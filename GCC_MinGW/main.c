@@ -5,11 +5,6 @@
 #include <time.h>
 #include "trcRecorder.h"
 
-#define LINUX 1
-#define WINDOWS 2
-
-// Change this if building on Linux
-#define BUILD_PLATFORM WINDOWS
 
 // Supporting functions for the demo
 static void sleep_ms(unsigned long ms);
@@ -26,11 +21,7 @@ static uint32_t traceTimerFreq, traceTimerOffset;
 
 // RTOS trace hooks, defining the instrumentation 
 
-#define tpTASK_CREATE(task) \
-	printf("Creating task %s (%d) @ 0x%08x\n", \
-				(task)->name, (task)->priority, (task)); \
-	xTraceObjectRegisterWithoutHandle( \
-		PSF_EVENT_TASK_CREATE, (task), (task)->name, (task)->priority)
+#define tpTASK_CREATE(task) xTraceObjectRegisterWithoutHandle(PSF_EVENT_TASK_CREATE, (task), (task)->name, (task)->priority)
 
 #define tpTASK_SWITCH(task) xTraceTaskSwitch((task), (task)->priority)
 
@@ -49,6 +40,8 @@ TraceStringHandle_t xUserEventChannel;
 
 int main(void) {
 	
+	printf("Tracealyzer SDK demo running...\n");
+
 	// Starts tracing and also registers a "main" task for the current execution context (the main function).
 	// Note that the main task is specific for the "bare metal" kernel port. See xTraceKernelPortEnable() in trcKernelPort.c.
 	// This is probably not suitable for RTOS integrations, since xTraceEnable might then be called from another task.
@@ -78,7 +71,7 @@ int main(void) {
 	tpTASK_CREATE(MyTask);
 	
 	sleep_ms(1);
-	
+
 	for (int i=0; i < 10; i++)
 	{	
 		// MyTask is ready to execute...
@@ -129,9 +122,9 @@ uint32_t uiTraceTimerGetFrequency(void) {
 	return traceTimerFreq;
 }
 
-#if (BUILD_PLATFORM == WINDOWS)
+#ifdef BUILD_WINDOWS
 	
-// OS-dependent "Hardware Port" functions for timestamping. Used in trcHardwarePort.h (in WIN32 port).
+// OS-dependent "Hardware Port" functions for timestamping.
 
 uint32_t uiTraceTimerGetValue(void) {
 
@@ -156,9 +149,9 @@ void vTraceTimerReset(void)
 #endif
 
 
-#if (BUILD_PLATFORM == LINUX)
+#ifdef BUILD_LINUX
 
-// OS-dependent "Hardware Port" functions for timestamping. Used in trcHardwarePort.h (in WIN32 port).
+// OS-dependent "Hardware Port" functions for timestamping.
 
 void vTraceTimerReset(void) {
 	struct timespec res;
@@ -168,10 +161,7 @@ void vTraceTimerReset(void) {
 		fprintf(stderr, "%s: %s\n", "clock_getres", strerror(errno));
 		exit(1);
 	}
-	//assert(res.tv_sec == 0);
 	traceTimerFreq = 1000000000ul / res.tv_nsec;
-	printf("clock_getres: %ld ns, traceTimerFreq=%lu Hz\n", 
-						res.tv_nsec, traceTimerFreq);
 	traceTimerOffset = -uiTraceTimerGetValue();
 }
 
@@ -187,10 +177,6 @@ uint32_t uiTraceTimerGetValue(void) {
 	r = ((uint64_t)tp.tv_sec * 1000000000ull + 
 			(uint32_t)tp.tv_nsec) / (1000000000ul / traceTimerFreq);
 	r += traceTimerOffset;
-#if 0
-	printf("%s: %lld.%09ld s -> %lu\n", "uiTraceTimerGetValue",
-					(long long)tp.tv_sec, tp.tv_nsec, r);
-#endif
 	return r;
 }
 

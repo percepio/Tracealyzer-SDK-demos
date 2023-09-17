@@ -1,6 +1,0 @@
-
-execUserSetup(){
-  __message "Enabling C-SPY simulation of ARM DWT Cycle Counter\n";
-  __setSimBreak("0xE0001004", "R", "*(unsigned int*)0xE0001004=#CCTIMER1");
-  __setSimBreak("0xE0001004", "W", "#CCTIMER1=*(unsigned int*)0xE0001004");  
-}
