@@ -9,14 +9,12 @@
 // Supporting functions for the demo
 static void sleep_ms(unsigned long ms);
 static void sleep_tv(const struct timespec *rqtp);
-static int test_timestamping(void);
 
 // OS-dependent "Hardware Port" functions for timestamping. Referenced in trcHardwarePort.h (WIN32 port, also used for Linux builds).
-uint32_t uiTraceTimerGetFrequency(void);
 uint32_t uiTraceTimerGetValue(void);
 void vTraceTimerReset(void);
 
-static uint32_t traceTimerFreq, traceTimerOffset;
+static uint32_t traceTimerOffset;
 
 
 // RTOS trace hooks, defining the instrumentation 
@@ -118,8 +116,16 @@ static void sleep_ms(unsigned long ms) {
 	sleep_tv(&rqt);
 }
 
-uint32_t uiTraceTimerGetFrequency(void) {
-	return traceTimerFreq;
+// Mock function for returning the interrupt mask, see critical section definitions in trcConfig.h 
+int placeholder_get_ISR_mask(void)
+{
+	return 0;
+}
+
+// Mock function for setting the interrupt mask, see critical section definitions in trcConfig.h 
+void placeholder_set_ISR_mask(int mask)
+{
+	(void)mask;
 }
 
 #ifdef BUILD_WINDOWS
@@ -141,8 +147,6 @@ uint32_t uiTraceTimerGetValue(void) {
 
 void vTraceTimerReset(void)
 {
-	traceTimerFreq = 1000000; // Microseconds
-	
 	traceTimerOffset = -uiTraceTimerGetValue();
 }
 

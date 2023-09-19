@@ -22,9 +22,27 @@ extern "C" {
 #define TRC_CFG_USE_TRACEALYZER_RECORDER 1
 
 /**
- * @brief Board CPU clock frequency in Hz. Must be changed from 0.
+ * @brief Critical Sections
+ * The TraceRecorder has its own macros for local critical sections. Some
+ * TraceRecorder functions are called both in kernel/interrupt and thread
+ * context, so the critical sections must work in both cases. 
+ * This is often implemented by disabling and restoring interrupts, which
+ * allows for calling TraceRecorder functions also from interrupt handlers.
+ * But other solutions are possible.
+ *
+ * The Bare Metal kernel port (that this demo is based on) does not define
+ * these macros, but placeholders are provided below. Make sure to implement
+ * these before using TraceRecorder in a multitasking system. 
  */
-#define TRC_CFG_CPU_CLOCK_HZ 1000000
+#define TRC_KERNEL_PORT_ALLOC_CRITICAL_SECTION() TraceUnsignedBaseType_t TRACE_ALLOC_CRITICAL_SECTION_NAME;
+#define TRC_CFG_ENTER_CRITICAL_SECTION() {TRACE_ALLOC_CRITICAL_SECTION_NAME = placeholder_get_ISR_mask(); placeholder_set_ISR_mask(1);}
+#define TRC_CFG_EXIT_CRITICAL_SECTION() {placeholder_set_ISR_mask(TRACE_ALLOC_CRITICAL_SECTION_NAME);}
+
+/* Defined in main.c */
+extern int placeholder_get_ISR_mask(void);
+
+/* Defined in main.c */
+extern void placeholder_set_ISR_mask(int mask);
 
 #ifdef __cplusplus
 }

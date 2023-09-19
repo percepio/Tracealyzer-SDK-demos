@@ -1,14 +1,16 @@
+
 OBJS	= ./obj/main.o ./obj/trcAssert.o ./obj/trcCounter.o ./obj/trcDependency.o ./obj/trcDiagnostics.o ./obj/trcEntryTable.o ./obj/trcError.o ./obj/trcEvent.o ./obj/trcEventBuffer.o ./obj/trcExtension.o ./obj/trcHardwarePort.o ./obj/trcHeap.o ./obj/trcInternalEventBuffer.o ./obj/trcInterval.o ./obj/trcISR.o ./obj/trcKernelPort.o ./obj/trcMultiCoreEventBuffer.o ./obj/trcObject.o ./obj/trcPrint.o ./obj/trcRunnable.o ./obj/trcSnapshotRecorder.o ./obj/trcStackMonitor.o ./obj/trcStateMachine.o ./obj/trcStaticBuffer.o ./obj/trcStreamingRecorder.o ./obj/trcString.o ./obj/trcTask.o ./obj/trcTimestamp.o ./obj/trcStreamPort.o
 SOURCE	= ../main.c ../TraceRecorder/trcAssert.c ../TraceRecorder/trcCounter.c ../TraceRecorder/trcDependency.c ../TraceRecorder/trcDiagnostics.c ../TraceRecorder/trcEntryTable.c ../TraceRecorder/trcError.c ../TraceRecorder/trcEvent.c ../TraceRecorder/trcEventBuffer.c ../TraceRecorder/trcExtension.c ../TraceRecorder/trcHardwarePort.c ../TraceRecorder/trcHeap.c ../TraceRecorder/trcInternalEventBuffer.c ../TraceRecorder/trcInterval.c ../TraceRecorder/trcISR.c ../TraceRecorder/trcKernelPort.c ../TraceRecorder/trcMultiCoreEventBuffer.c ../TraceRecorder/trcObject.c ../TraceRecorder/trcPrint.c ../TraceRecorder/trcRunnable.c ../TraceRecorder/trcSnapshotRecorder.c ../TraceRecorder/trcStackMonitor.c ../TraceRecorder/trcStateMachine.c ../TraceRecorder/trcStaticBuffer.c ../TraceRecorder/trcStreamingRecorder.c ../TraceRecorder/trcString.c ../TraceRecorder/trcTask.c ../TraceRecorder/trcTimestamp.c ../TraceRecorder/trcStreamPort.c
 HEADER	= -I../TraceRecorder/include -I../TraceRecorder/config
 OUT	= ..\tz-sdk-demo.exe
 CC	 = gcc
-FLAGS	 = -g -c $(HEADER) -DBUILD_WINDOWS
-#FLAGS	 = -g -c -Wall $(HEADER)
+FLAGS	 = -g -c -Wall $(HEADER) -DBUILD_WINDOWS
 LFLAGS	 = 
 
-all: $(OBJS)
+all: objdir $(OBJS)
 	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
+
+objdir: $(shell mkdir obj)
 
 ./obj/main.o: ../main.c
 	$(CC) $(FLAGS) ../main.c -o ./obj/main.o
@@ -97,7 +99,7 @@ all: $(OBJS)
 ./obj/trcStreamPort.o: ../TraceRecorder/trcStreamPort.c
 	$(CC) $(FLAGS) ../TraceRecorder/trcStreamPort.c -o ./obj/trcStreamPort.o
 
-
 clean:
-	del /Q obj
-	del $(OUT)
+	del /Q /F obj
+	del /Q /F $(OUT)
+	
