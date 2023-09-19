@@ -346,19 +346,17 @@ extern "C" {
 #define TRC_HWTC_TYPE TRC_FREE_RUNNING_32BIT_INCR
 #define TRC_HWTC_COUNT ((TraceUnsignedBaseType_t)uiTraceTimerGetValue())
 
-/* Timestamp resolution = 1 MHz*/
-#define TRC_CFG_CPU_CLOCK_HZ 1000000
-
 /* These are not used in this case, but must be defined */
 #define TRC_HWTC_PERIOD 0 // Should be zero (0) when using TRC_FREE_RUNNING_32BIT_INCR 
 #define TRC_HWTC_DIVISOR 1 // Only used by old "snapshot mode"
-#define TRC_HWTC_FREQ_HZ TRC_CFG_CPU_CLOCK_HZ // Must be defined (a bit redundant) 
-
-/* Meaning of ISR priority levels */
-#define TRC_IRQ_PRIORITY_ORDER 1
+#define TRC_IRQ_PRIORITY_ORDER 1 // 1 = Higher interrupt priority value is more significant.
+#define TRC_CFG_CPU_CLOCK_HZ 42  // Not used, but must be non-zero. 
 
 /* Called when starting to initialize the timestamping */
 #define TRC_PORT_SPECIFIC_INIT() vTraceTimerReset()
+
+/* Timestamp resultion provided by uiTraceGetFrequency(), see main.c */
+#define TRC_HWTC_FREQ_HZ ((TraceUnsignedBaseType_t)uiTraceTimerGetFrequency())
 
 /* Needed for below prototypes */
 #include <stdint.h>
@@ -369,6 +367,8 @@ void vTraceTimerReset(void);
 /* Implemented in main.c */
 uint32_t uiTraceTimerGetValue(void);
 
+/* Implemented in main.c */
+uint32_t uiTraceTimerGetFrequency(void);
 
 #ifdef __cplusplus
 }
