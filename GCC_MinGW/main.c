@@ -12,6 +12,7 @@ static void sleep_tv(const struct timespec *rqtp);
 
 // OS-dependent "Hardware Port" functions for timestamping. Referenced in trcHardwarePort.h (WIN32 port, also used for Linux builds).
 uint32_t uiTraceTimerGetValue(void);
+uint32_t uiTraceTimerGetFrequency(void);
 void vTraceTimerReset(void);
 
 static uint32_t traceTimerOffset;
@@ -108,6 +109,7 @@ static void sleep_tv(const struct timespec *rqtp) {
 	}
 }
 
+// This is not exact on Windows...
 static void sleep_ms(unsigned long ms) {
 	struct timespec rqt;
 
@@ -139,9 +141,8 @@ uint32_t uiTraceTimerGetValue(void) {
     unsigned long long tt = ft.dwHighDateTime;
     tt <<=32;
     tt |= ft.dwLowDateTime;
-    tt /=10;
-    tt -= 11644473600000000ULL;
 
+	// Return timestamp in microseconds.
 	return tt + traceTimerOffset;
 }
 
@@ -150,12 +151,19 @@ void vTraceTimerReset(void)
 	traceTimerOffset = -uiTraceTimerGetValue();
 }
 
+uint32_t uiTraceTimerGetFrequency(void)
+{
+	// 100 ns resolution
+	return 10000000;
+}
+
 #endif
 
 
 #ifdef BUILD_LINUX
 
 // OS-dependent "Hardware Port" functions for timestamping.
+static uint32_t traceTimerFreq = 0;
 
 void vTraceTimerReset(void) {
 	struct timespec res;
@@ -182,6 +190,11 @@ uint32_t uiTraceTimerGetValue(void) {
 			(uint32_t)tp.tv_nsec) / (1000000000ul / traceTimerFreq);
 	r += traceTimerOffset;
 	return r;
+}
+
+uint32_t uiTraceTimerGetFrequency(void)
+{
+	return traceTimerFreq;
 }
 
 #endif

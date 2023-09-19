@@ -3,12 +3,13 @@ SOURCE	= ../main.c ../TraceRecorder/trcAssert.c ../TraceRecorder/trcCounter.c ..
 HEADER	= -I../TraceRecorder/include -I../TraceRecorder/config
 OUT	= ../tz-sdk-demo
 CC	 = gcc
-FLAGS	 = -g -c $(HEADER) -DBUILD_LINUX
-#FLAGS	 = -g -c -Wall $(HEADER)
+FLAGS	 = -g -c -Wall $(HEADER) -DBUILD_LINUX
 LFLAGS	 = 
 
-all: $(OBJS)
+all: objdir $(OBJS)
 	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
+
+objdir: $(shell mkdir obj)
 
 ./obj/main.o: ../main.c
 	$(CC) $(FLAGS) ../main.c -o ./obj/main.o
