@@ -5,7 +5,7 @@
  own Tracealyzer integration for RTOS kernels, middleware or in-house APIs.
  
  This demo project is for GNU tools (gcc, make). Makefiles are provided for
- Linux and Windows hosts in the sudfolders Build-Windows and Build-Linux.
+ Linux and Windows hosts in the subfolders Build-Windows and Build-Linux.
   
  ## Getting Tracealyzer
  If you don't have Tracealyzer already, get it from https://percepio.com 

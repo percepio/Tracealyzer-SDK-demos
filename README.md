@@ -9,4 +9,4 @@ instrumentation in communication stacks, file systems, drivers and other importa
 
 This repository provides demo projects for the Tracealyzer SDK, that can be used as starting point for your custom Tracealyzer integration.
 
-See the readmes in the respective demo folder for more specific information.
+See the README.md files in the respective demo folder for more specific information.
