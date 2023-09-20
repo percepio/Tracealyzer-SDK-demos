@@ -1,0 +1,13 @@
+"C:\Program Files\IAR Systems\Embedded Workbench 9.1\arm\bin\armPROC.dll" 
+
+"C:\Program Files\IAR Systems\Embedded Workbench 9.1\arm\bin\armSIM2.dll" 
+
+"C:\src\GithubRepos\Tz-SDK-Demo\IAR_Arm_Simulator\Project-v9.3\Debug\Exe\tz-sdk-demo.out" 
+
+--plugin="C:\Program Files\IAR Systems\Embedded Workbench 9.1\arm\bin\armbat.dll" 
+
+--macro="C:\src\GithubRepos\Tz-SDK-Demo\IAR_Arm_Simulator\Project-v9.3\..\IAR_ARM_DWT_Simulator.mac" 
+
+
+
+

@@ -20,7 +20,7 @@ extern "C" {
  *
  * @brief Defines the trace file name
  */
-#define TRC_CFG_STREAM_PORT_TRACE_FILE "trace.psf"
+#define TRC_CFG_STREAM_PORT_TRACE_FILE "../trace.psf"
 
 
 /**

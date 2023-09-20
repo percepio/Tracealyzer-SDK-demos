@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>5</fileVersion>
+    <fileChecksum>2181588842</fileChecksum>
+    <configuration>
+        <name>Debug</name>
+        <outputs>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcSnapshotRecorder.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcStackMonitor.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcStateMachine.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcObject.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcPrint.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcRunnable.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcKernelPort.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcMultiCoreEventBuffer.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcStreamingRecorder.o</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcDependency.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcEntryTable.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcCounter.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcDiagnostics.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcAssert.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcISR.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcEvent.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcSnapshotRecorder.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcStateMachine.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcHeap.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcPrint.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcStreamPort.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcString.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcStaticBuffer.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcMultiCoreEventBuffer.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcEventBuffer.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcTimestamp.c</file>
+            <file>$PROJ_DIR$\..\main.c</file>
+            <file>$PROJ_DIR$\..\README.md</file>
+            <file>$PROJ_DIR$\..\util.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcInterval.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcStreamingRecorder.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcStackMonitor.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcObject.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcKernelPort.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcInternalEventBuffer.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcTask.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcExtension.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcError.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcRunnable.c</file>
+            <file>$PROJ_DIR$\..\TraceRecorder\trcHardwarePort.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcDependency.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcCounter.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcEvent.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcExtension.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcInternalEventBuffer.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcEntryTable.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcDiagnostics.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcHeap.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcEventBuffer.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcISR.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcInterval.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcStaticBuffer.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcHardwarePort.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcError.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcAssert.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcTimestamp.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcStreamPort.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\util.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcTask.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\TraceRecorder\trcString.o</file>
+        </outputs>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcDependency.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 40</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcEntryTable.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 45</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcCounter.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 41</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcDiagnostics.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 46</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcAssert.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 54</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcISR.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 49</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcEvent.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 42</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcSnapshotRecorder.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 0</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcStateMachine.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 2</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcHeap.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 47</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcPrint.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 4</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcStreamPort.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 57</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcString.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 60</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcStaticBuffer.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 51</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcMultiCoreEventBuffer.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 7</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcEventBuffer.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 48</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcTimestamp.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 56</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 55</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\util.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 58</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcInterval.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 50</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcStreamingRecorder.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 8</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcStackMonitor.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 1</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcObject.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 3</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcKernelPort.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 6</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcInternalEventBuffer.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 44</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcTask.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 59</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcExtension.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 43</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcError.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 53</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcRunnable.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 5</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\TraceRecorder\trcHardwarePort.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 52</file>
+                </tool>
+            </outputs>
+        </file>
+        <forcedrebuild>
+            <name>[REBUILD_ALL]</name>
+        </forcedrebuild>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs />
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>ILINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>

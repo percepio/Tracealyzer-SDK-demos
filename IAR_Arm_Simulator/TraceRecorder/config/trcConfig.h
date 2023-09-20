@@ -23,8 +23,11 @@ extern "C" {
  * required at least for the ARM Cortex-M port, that uses the ARM CMSIS API.
  * Try that in case of build problems. Otherwise, remove the #error line below.
  *****************************************************************************/
-// #error "Trace Recorder: Please include your processor's header file here and remove this line."
-// No extra header file needed for this demo...
+#define __CORTEX_M 3
+#include <stdint.h>
+#include "cmsis_iccarm.h"
+#define TRC_CFG_CPU_CLOCK_HZ 10000000 // Default simulation frequency 10 MHz
+
 
 /******************************************************************************
  * Note on Critical Sections
@@ -50,14 +53,7 @@ extern "C" {
  * See trcHardwarePort.h for available ports and information on how to
  * define your own port, if not already present.
  */
-#define TRC_CFG_HARDWARE_PORT TRC_HARDWARE_PORT_APPLICATION_DEFINED
-
-/******************************************************************************
- * Note on TRC_CFG_HARDWARE_PORT: 
- * By selecting TRC_HARDWARE_PORT_APPLICATION_DEFINED, we can override the 
- * definitions in trcHardwarePort.h with a custom setup for timestamping etc.
- * These are provided in the end of this file.
- *****************************************************************************/
+#define TRC_CFG_HARDWARE_PORT TRC_HARDWARE_PORT_ARM_Cortex_M
 
 /**
  * @def TRC_CFG_SCHEDULING_ONLY
@@ -331,44 +327,6 @@ extern "C" {
  */
 #define TRC_CFG_USE_TRACE_ASSERT 0
 
-
-/******************************************************************************
- * By setting TRC_CFG_HARDWARE_PORT as TRC_HARDWARE_PORT_APPLICATION_DEFINED, 
- * we can override the definitions in trcHardwarePort.h with a custom setup
- * for timestamping etc., provided below.
- *****************************************************************************/
-
-/* 64-bit mode */
-#define TRC_BASE_TYPE int64_t
-#define TRC_UNSIGNED_BASE_TYPE uint64_t
-
-/* Timestamping definitions */
-#define TRC_HWTC_TYPE TRC_FREE_RUNNING_32BIT_INCR
-#define TRC_HWTC_COUNT ((TraceUnsignedBaseType_t)uiTraceTimerGetValue())
-
-/* These are not used in this case, but must be defined */
-#define TRC_HWTC_PERIOD 0 // Should be zero (0) when using TRC_FREE_RUNNING_32BIT_INCR 
-#define TRC_HWTC_DIVISOR 1 // Only used by old "snapshot mode"
-#define TRC_IRQ_PRIORITY_ORDER 1 // 1 = Higher interrupt priority value is more significant.
-#define TRC_CFG_CPU_CLOCK_HZ 42  // Not used, but must be non-zero. 
-
-/* Called when starting to initialize the timestamping */
-#define TRC_PORT_SPECIFIC_INIT() vTraceTimerReset()
-
-/* Timestamp resultion provided by uiTraceGetFrequency(), see main.c */
-#define TRC_HWTC_FREQ_HZ ((TraceUnsignedBaseType_t)uiTraceTimerGetFrequency())
-
-/* Needed for below prototypes */
-#include <stdint.h>
-
-/* Implemented in main.c */
-void vTraceTimerReset(void);
-
-/* Implemented in main.c */
-uint32_t uiTraceTimerGetValue(void);
-
-/* Implemented in main.c */
-uint32_t uiTraceTimerGetFrequency(void);
 
 #ifdef __cplusplus
 }

@@ -13,7 +13,6 @@
 #define tpTASK_SWITCH(task) xTraceTaskSwitch((task), (task)->priority)
 
 // RTOS task struct
-
 typedef struct {
 	char *name;
 	int priority;
@@ -24,7 +23,6 @@ typedef struct {
 TraceStringHandle_t xUserEventChannel;
 
 // Demo application, generating a short trace file for Tracealyzer (trace.psf)
-
 int main(void) {
 	
 	printf("Tracealyzer SDK demo running...\n");
@@ -37,7 +35,7 @@ int main(void) {
 	// Register a channel for "user events"
 	xTraceStringRegister("Logging", &xUserEventChannel);
 
-    // Sleep calls are used to spread out the events over the timeline, so the trace becomes more realistic and easier to read.
+	// Sleep calls are used to spread out the events over the timeline, so the trace becomes more realistic and easier to read.
 	sleep_ms(1); 
 	
 	// Initialize the IDLE task
