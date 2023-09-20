@@ -18,14 +18,22 @@
  2. Open File -> Settings -> Project Settings -> Definition File Paths
  3. Add the project root folder path, where EXAMPLE-v1.0.1.xml is located.
  
-  ## Viewing traces in Tracealyzer
- 1. Select "Download and Debug" (Ctrl-D).
- 2. Select Run (F5)
- 3. Check the Terminal I/O window (View menu).
- 4. Wait until you see "Trace file closed." 
- 5. You should now have a trace file called "trace.psf" in the project folder.
- 6. Start Tracealyzer, select File -> Open -> Open File and select this file.
+ ## Building and Running the Demo in IAR Embedded Workbench for Arm
+ 1. Open the subfolder "Project-v9.x" that matches your IAR installation. 
+    If you don't find an exact match, select a project with lower version number than what you have installed.	
+ 2. Select "Make" (F7 by default)
+ 3. Select "Download and Debug" (CTRL-D by default)
+ 4. Select "Run" (F5 by default)
+ 5. Wait until the breakpoint is hit, at the end of the program. 
+ 6. Close the debug session.
  
+ ## Viewing the traces in Tracealyzer
+ Once the demo application has completed, you should see "trace.psf" in the top
+ folder, i.e. next to this README.md.
+ Now start Tracealyzer and open this file (File -> Open -> Open File).
+ You may also open the file by dragging it to the Tracealyzer window or by 
+ double-clicking the .psf file (if using Windows).
+  
  ## Notes
  In this demo, the trace streaming is done using semihosting, i.e. fwrite
  to host files. The performance of this fairly slow and varies quite a lot
