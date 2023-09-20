@@ -1,7 +1,7 @@
 # Tracealyzer SDK demo for IAR ARM C-Spy Simulator
  
- This project demonstrates the Tracalyzer SDK using a BareMetal platform with
- simulated RTOS events. This is intended as a starting point for creating your
+ This project demonstrates the [Tracealyzer SDK](https://percepio.com/tracealyzer-sdk/)
+ using simulated RTOS events. This is intended as a starting point for creating your
  own Tracealyzer integration for RTOS kernels, middleware or in-house APIs.
  
  ## Getting Tracealyzer

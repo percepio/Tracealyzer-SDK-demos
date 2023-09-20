@@ -1,11 +1,11 @@
 # Tracealyzer SDK demo for desktop testing with GNU tools
  
- This project demonstrates the Tracalyzer SDK using a BareMetal platform with
- simulated RTOS events. This is intended as a starting point for creating your
+ This project demonstrates the [Tracealyzer SDK](https://percepio.com/tracealyzer-sdk/)
+ using simulated RTOS events. This is intended as a starting point for creating your
  own Tracealyzer integration for RTOS kernels, middleware or in-house APIs.
  
- This demo project is for GNU tools (gcc, make). Makefiles are provided for
- Linux and Windows hosts in the subfolders Build-Windows and Build-Linux.
+ This demo project is for GNU tools (make/gcc). Makefiles are provided for
+ Linux and Windows in the subfolders Build-Windows and Build-Linux.
   
  ## Getting Tracealyzer
  If you don't have Tracealyzer already, get it from https://percepio.com 
@@ -22,10 +22,10 @@
  3. Add the project root folder path, where EXAMPLE-v1.0.1.xml is located.
  
  ## Building and Running the Demo
- 1. Open a terminal window and enter the Build-Linux or Build-Windows directory.
+ 1. Open a terminal window and "cd" into the Build-Linux or Build-Windows subfolder.
  2. Type "gcc -v" to check that your gcc is for 64-bit x86_64 builds.
  3. Type "make -j8" to build (-j8 is not needed but makes it build a bit faster).
- 4. Move to the parent folder ("cd ..") where the executable has been created.
+ 4. Return to the parent folder ("cd ..") where the executable is found created.
  5. Run the executable (tz-sdk-demo or tz-sdk-demo.exe).
  
  ## Viewing the traces in Tracealyzer
