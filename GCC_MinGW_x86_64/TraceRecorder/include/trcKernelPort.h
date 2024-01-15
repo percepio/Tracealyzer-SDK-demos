@@ -51,7 +51,7 @@ extern "C" {
 #define TRC_KERNEL_PORT_HEAP_MALLOC(size) malloc(size)
 #endif
 
-#define TRC_PLATFORM_CFG "nokernel"
+#define TRC_PLATFORM_CFG "my_krnl"
 #define TRC_PLATFORM_CFG_MAJOR 1
 #define TRC_PLATFORM_CFG_MINOR 0
 #define TRC_PLATFORM_CFG_PATCH 0
@@ -186,6 +186,11 @@ traceResult xTraceKernelPortEnable(void);
 #define PSF_EVENT_USER_EVENT								0x50UL
 
 #define PSF_EVENT_USER_EVENT_FIXED							0x58UL
+
+
+#define PSF_EVENT_MUTEX_CREATE								0x60
+#define PSF_EVENT_MUTEX_LOCK								0x61
+#define PSF_EVENT_MUTEX_UNLOCK								0x62
 
 #define TRC_EVENT_LAST_ID									(PSF_EVENT_DEPENDENCY_REGISTER)
 

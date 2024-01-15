@@ -1,0 +1,7 @@
+GCC_MinGW/tzCef.log
+*.o
+*.exe
+*.bak
+IAR_Arm_Simulator/Project-v9.1/Debug/
+IAR_Arm_Simulator/Project-v9.2/Debug/
+IAR_Arm_Simulator/Project-v9.3/Debug/

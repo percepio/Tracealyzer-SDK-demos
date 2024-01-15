@@ -4,88 +4,98 @@
 #include "trcRecorder.h"
 #include "util.h"
 
-// RTOS trace hooks, defining the instrumentation 
-
-// Trace hook on task creation
-#define tpTASK_CREATE(task) xTraceObjectRegisterWithoutHandle(PSF_EVENT_TASK_CREATE, (task), (task)->name, (task)->priority)
-
-// Trace hook on task switch event
-#define tpTASK_SWITCH(task) xTraceTaskSwitch((task), (task)->priority)
+/*** Stuff for simulating a small RTOS ***/ 
 
 // RTOS task struct
-
 typedef struct {
 	char *name;
 	int priority;
+	uint64_t thread_id;
 } task_t;
 
+// Mutex struct
+typedef struct {
+	char *name;
+	int owner;
+	uint64_t id;
+} os_mutex_t;
 
-// User events provide general logging. Needs a "channel".
-TraceStringHandle_t xUserEventChannel;
+// Task and Mutex object instances
+task_t idle = {"IDLE",  31, 1};
+task_t mytask = {"Task2", 10, 2};
+os_mutex_t m1 = {"mutex1", 0, 3};
 
-// Demo application, generating a short trace file for Tracealyzer (trace.psf)
+void os_mutex_lock(os_mutex_t mutex);
+void os_mutex_unlock(os_mutex_t mutex);
 
-int main(void) {
-	
+/*** The Demo Application ***/
+
+int main(void)
+{
+	// This keeps a handle for a user event channel, used for general logging.
+	TraceStringHandle_t xUserEventChannel;
+
 	printf("Tracealyzer SDK demo running...\n");
 
-	// Starts tracing and also registers a "main" task for the current execution context (the main function).
-	// Note that the main task is specific for the "bare metal" kernel port. See xTraceKernelPortEnable() in trcKernelPort.c.
-	// This is probably not suitable for RTOS integrations, since xTraceEnable might then be called from another task.
+	// Starts tracing
 	xTraceEnable(TRC_START);
 
 	// Register a channel for "user events"
 	xTraceStringRegister("Logging", &xUserEventChannel);
 
-    // Sleep calls are used to spread out the events over the timeline, so the trace becomes more realistic and easier to read.
+    // Sleep calls are used to simulate longer execution time.
 	sleep_ms(1); 
-	
-	// Initialize the IDLE task
-	task_t idle = {"IDLE",  31};
-	task_t *IDLE = &idle;
 
-	// Trace hook for registering a new task.
-	tpTASK_CREATE(IDLE);
+	// Registers the objects in the trace. Normally hidden in the object initialization calls.
+	(void)xTraceObjectRegisterWithoutHandle(PSF_EVENT_TASK_CREATE, (void*)idle.thread_id, idle.name, idle.priority);
+	(void)xTraceObjectRegisterWithoutHandle(PSF_EVENT_TASK_CREATE, (void*)mytask.thread_id, mytask.name, mytask.priority);
+	(void)xTraceObjectRegisterWithoutHandle(PSF_EVENT_MUTEX_CREATE, (void*)m1.id, m1.name, 0);
 
 	sleep_ms(1); 
 	
-	// Adds a "Ready" event for IDLE, meaning it is ready to execute at this point.
-	xTraceTaskReady(IDLE);
-	
-	// Initialize and register another task.
-	task_t mytask = {"MyTask", 5};
-	task_t *MyTask = &mytask;
-	tpTASK_CREATE(MyTask);
-	
+	// Adds a "Ready" event for IDLE, meaning it is ready to execute at this point. Normally hidden in the kernel.
+	xTraceTaskReady((void*)idle.thread_id);
+		
 	sleep_ms(1);
 
+	// Terminate after 50 cycles
 	for (int i=0; i < 50; i++)
 	{	
-		// MyTask is ready to execute...
-		xTraceTaskReady(MyTask);
+		// Normally in kernel instrumentation
+		xTraceTaskReady((void*)mytask.thread_id);
+
+		// Normally in kernel instrumentation
+		xTraceTaskSwitch((void*)mytask.thread_id, mytask.priority);
 		
-		// Store a task-switch event when MyTask begins executing.
-		tpTASK_SWITCH(MyTask);
-		
-		// Simulating execution of MyTask
 		sleep_ms(10);
-		
-		// Logging a user event...
-		xTracePrintF(xUserEventChannel, "Counter: %d", i);
-		
-		// Simulating execution of MyTask
-		sleep_ms(10);
+
+		os_mutex_lock(m1);
 	
-		// Switch back to IDLE
-		tpTASK_SWITCH(IDLE);
+		xTracePrintF(xUserEventChannel, "Counter: %d", i);
+
+		os_mutex_unlock(m1);
+	
+		sleep_ms(10);
 		
-		// Simulating execution of IDLE
+		// Normally in kernel instrumentation
+		xTraceTaskSwitch((void*)idle.thread_id, idle.priority);
+		
 		sleep_ms(90);
 	}
 	
 	// Calls xTraceStreamPortOnTraceEnd to save the trace data to file.
 	xTraceDisable();
 	return 0;
+}
+
+void os_mutex_lock(os_mutex_t mutex)
+{
+	(void)xTraceEventCreate1(PSF_EVENT_MUTEX_LOCK, mutex.id);
+}
+
+void os_mutex_unlock(os_mutex_t mutex)
+{
+	(void)xTraceEventCreate1(PSF_EVENT_MUTEX_UNLOCK, mutex.id);
 }
 
 /******************************************************************************
@@ -107,3 +117,4 @@ void placeholder_set_ISR_mask(int mask)
 {
 	(void)mask;
 }
+
