@@ -1,5 +1,5 @@
 /*
-* Percepio Trace Recorder for Tracealyzer v989.878.767
+* Percepio Trace Recorder for Tracealyzer v4.8.2
 * Copyright 2023 Percepio AB
 * www.percepio.com
 *
@@ -36,7 +36,7 @@ traceResult xTraceEventBufferInitialize(TraceEventBuffer_t* pxTraceEventBuffer, 
 	pxTraceEventBuffer->uiNextHead = 0u;
 	pxTraceEventBuffer->uiTimerWraparounds = 0u;
 
-	xTraceSetComponentInitialized(TRC_RECORDER_COMPONENT_EVENT_BUFFER);
+	(void)xTraceSetComponentInitialized(TRC_RECORDER_COMPONENT_EVENT_BUFFER);
 
 	return TRC_SUCCESS;
 }

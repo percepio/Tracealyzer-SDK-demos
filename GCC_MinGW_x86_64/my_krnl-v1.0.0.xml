@@ -3,14 +3,23 @@
 	
 	<EventCodes>
 	
-		<EventGroup name="Core">
-		  <Event code="0x01" type="TraceStart" />
-		  <Event code="0x02" type="TimestampConfig" />
-		  <Event code="0x03" type="ObjectName" />
-		  <Event code="0x20" type="TaskReady" />
-		  <Event code="0x25" type="SwitchToTask"/>
-		</EventGroup>
-		
+	<EventGroup name="Core">
+      
+	  <Event code="0x01" type="TraceStart" />
+      <Event code="0x03" type="ObjectName" />
+      
+	  <Event code="0x05" type="IsrProperties"/>
+	  
+      <Event code="0x20" type="TaskReady" />
+
+      <Event code="0x21" type="SwitchToInterrupt" resumeInstance="false" />
+      <Event code="0x22" type="SwitchToInterrupt" resumeInstance="true" />
+
+      <Event code="0x23" type="SwitchToTask"  resumeInstance="false"/>
+      <Event code="0x24" type="SwitchToTask"  resumeInstance="true" />
+      <Event code="0x25" type="SwitchToTask"  resumeInstance="false"/>
+    </EventGroup>
+	
 		<EventGroup name="Task">
 		  <Event code="0x10" type="ObjectState">
 			<Param index="0" type="Handle" class="Task"/>
@@ -23,12 +32,29 @@
 		  </Event>
 		</EventGroup>
 
-		<EventGroup name="UserEvent">
-			<Event code="0x50" type="UserEvent">
-			<Param index="0" type="StringHandle" useAs="Channel"></Param>
-			<Param index="1" type="String" useAs="Message"></Param>
+	  <EventGroup name="os_mutex">
+	  
+		<Event code="0x60" service="os_mutex/os_mutex_init" type="KernelServiceReturn">
+		  <Param index="0" type="Handle" class="os_mutex" useAs="Arg"/>
 		</Event>
-			<Event code="0x51" type="UserEvent">
+		
+		<Event code="0x61" service="os_mutex/os_mutex_lock" type="KernelServiceReturn">
+		  <Param index="0" type="Handle" class="os_mutex" useAs="Arg"/>
+		</Event>
+		
+		<Event code="0x62" service="os_mutex/os_mutex_unlock" type="KernelServiceReturn">
+		  <Param index="0" type="Handle" class="os_mutex" useAs="Arg"/>
+		</Event>
+	  
+	  </EventGroup>
+	  
+	  
+	<EventGroup name="UserEvent">
+		<Event code="0x50" type="UserEvent">
+		<Param index="0" type="StringHandle" useAs="Channel"></Param>
+		<Param index="1" type="String" useAs="Message"></Param>
+	</Event>
+		<Event code="0x51" type="UserEvent">
 			<Param index="0" type="StringHandle" useAs="Channel"></Param>
 			<Param index="1" type="String" useAs="Message"></Param>
 		</Event>
@@ -102,27 +128,12 @@
 			<Param index="2" useAs="PrintfArgStart"></Param>
 		</Event>
 	  </EventGroup>	
-		
-	  <EventGroup name="os_mutex">
-	  
-		<Event code="0x60" service="os_mutex/os_mutex_init" type="KernelServiceReturn">
-		  <Param index="0" type="Handle" class="os_mutex" useAs="Arg"/>
-		</Event>
-		
-		<Event code="0x61" service="os_mutex/os_mutex_lock" type="KernelServiceReturn">
-		  <Param index="0" type="Handle" class="os_mutex" useAs="Arg"/>
-		</Event>
-		
-		<Event code="0x62" service="os_mutex/os_mutex_unlock" type="KernelServiceReturn">
-		  <Param index="0" type="Handle" class="os_mutex" useAs="Arg"/>
-		</Event>
-	  
-	  </EventGroup>
 
   </EventCodes>
 
   <TargetPlatform>
-    <KernelServiceGroups>
+    
+	<KernelServiceGroups>
       <KernelServiceGroup name="Task">
         <KernelService name="xTaskCreate" operation="Initialize">
           <Parameter name="task" format="Task {0}" />
@@ -134,14 +145,17 @@
           <KernelService name="os_mutex_lock" operation="LockMutex"/>
           <KernelService name="os_mutex_unlock" operation="ReleaseMutex"/>
       </KernelServiceGroup>
-
     </KernelServiceGroups>
+	
     <ObjectClasses>
       <ObjectClass name="SystemGroup" type="ActorGroup" options="Hidden" />
       <ObjectClass name="Task" type="Actor"/>
       <ObjectClass name="os_mutex" type="Mutex"/>   
       <ObjectClass name="ISR" type="Actor"/>
     </ObjectClasses>
-    <TaskPriorityDirection>HigherNumberIsMoreImportant</TaskPriorityDirection>
+    
+	<TaskPriorityDirection>HigherNumberIsMoreImportant</TaskPriorityDirection>
+  
   </TargetPlatform>
+  
 </PlatformExtension> 
